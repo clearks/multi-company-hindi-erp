@@ -1,0 +1,17 @@
+CREATE TABLE IF NOT EXISTS super_admins (
+    id BIGSERIAL PRIMARY KEY,
+
+    full_name VARCHAR(150) NOT NULL,
+
+    email VARCHAR(150) UNIQUE NOT NULL,
+
+    password VARCHAR(255) NOT NULL,
+
+    mobile VARCHAR(20),
+
+    is_active BOOLEAN DEFAULT TRUE,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

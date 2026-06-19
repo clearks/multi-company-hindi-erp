@@ -1,0 +1,5 @@
+ALTER TABLE super_admins
+ADD COLUMN last_login TIMESTAMP NULL,
+ADD COLUMN last_login_ip VARCHAR(100),
+ADD COLUMN created_by BIGINT,
+ADD COLUMN remarks TEXT;
