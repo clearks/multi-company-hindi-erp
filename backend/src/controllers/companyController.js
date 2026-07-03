@@ -1,4 +1,7 @@
 const companyModel = require("../models/companyModel");
+const {
+    bootstrapCompanyAccounts
+} = require("../services/finance/accountBootstrapService");
 
 // सभी Companies
 const getCompanies = async (req, res) => {
@@ -48,6 +51,15 @@ const createCompany = async (req, res) => {
             company_name,
             company_code
         );
+
+        // ============================================
+// Bootstrap Finance Structure
+// ============================================
+
+await bootstrapCompanyAccounts(
+    company.id,
+    null
+);
 
         res.status(201).json({
             success: true,

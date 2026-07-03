@@ -3,48 +3,58 @@ const express = require("express");
 const router = express.Router();
 
 const authMiddleware = require("../middlewares/authMiddleware");
+
 const { authorizeRoles } = require("../middlewares/roleMiddleware");
 
 const {
-    addEmployee,
-    listEmployees,
-    getEmployee,
-    updateEmployeeDetails,
-    removeEmployee
-} = require("../controllers/employeeController");
+    addRawMaterial,
+    listRawMaterials,
+    getRawMaterial,
+    updateRawMaterialById,
+    deleteRawMaterialById
+} = require("../controllers/rawMaterialController");
 
+
+// Create Raw Material
 router.post(
     "/",
     authMiddleware,
     authorizeRoles("COMPANY_ADMIN"),
-    addEmployee
+    addRawMaterial
 );
 
+
+// Raw Material List
 router.get(
     "/",
     authMiddleware,
-    authorizeRoles("COMPANY_ADMIN"),
-    listEmployees
+    listRawMaterials
 );
 
+
+// Single Raw Material
 router.get(
     "/:id",
     authMiddleware,
-    authorizeRoles("COMPANY_ADMIN"),
-    getEmployee
+    getRawMaterial
 );
 
+
+// Update Raw Material
 router.put(
     "/:id",
     authMiddleware,
     authorizeRoles("COMPANY_ADMIN"),
-    updateEmployeeDetails
+    updateRawMaterialById
 );
 
+
+// Soft Delete Raw Material
 router.delete(
     "/:id",
     authMiddleware,
     authorizeRoles("COMPANY_ADMIN"),
-    removeEmployee
+    deleteRawMaterialById
 );
+
 module.exports = router;

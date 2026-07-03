@@ -3,48 +3,58 @@ const express = require("express");
 const router = express.Router();
 
 const authMiddleware = require("../middlewares/authMiddleware");
+
 const { authorizeRoles } = require("../middlewares/roleMiddleware");
 
 const {
-    addEmployee,
-    listEmployees,
-    getEmployee,
-    updateEmployeeDetails,
-    removeEmployee
-} = require("../controllers/employeeController");
+    addCustomer,
+    listCustomers,
+    getCustomer,
+    updateCustomerById,
+    deleteCustomerById
+} = require("../controllers/customerController");
 
+
+// Create Customer
 router.post(
     "/",
     authMiddleware,
     authorizeRoles("COMPANY_ADMIN"),
-    addEmployee
+    addCustomer
 );
 
+
+// Customer List
 router.get(
     "/",
     authMiddleware,
-    authorizeRoles("COMPANY_ADMIN"),
-    listEmployees
+    listCustomers
 );
 
+
+// Single Customer
 router.get(
     "/:id",
     authMiddleware,
-    authorizeRoles("COMPANY_ADMIN"),
-    getEmployee
+    getCustomer
 );
 
+
+// Update Customer
 router.put(
     "/:id",
     authMiddleware,
     authorizeRoles("COMPANY_ADMIN"),
-    updateEmployeeDetails
+    updateCustomerById
 );
 
+
+// Soft Delete Customer
 router.delete(
     "/:id",
     authMiddleware,
     authorizeRoles("COMPANY_ADMIN"),
-    removeEmployee
+    deleteCustomerById
 );
+
 module.exports = router;

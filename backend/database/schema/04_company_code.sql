@@ -1,0 +1,3 @@
+ALTER TABLE companies
+
+ADD COLUMN IF NOT EXISTS company_code VARCHAR(20);

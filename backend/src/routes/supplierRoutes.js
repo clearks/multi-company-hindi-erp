@@ -3,48 +3,58 @@ const express = require("express");
 const router = express.Router();
 
 const authMiddleware = require("../middlewares/authMiddleware");
+
 const { authorizeRoles } = require("../middlewares/roleMiddleware");
 
 const {
-    addEmployee,
-    listEmployees,
-    getEmployee,
-    updateEmployeeDetails,
-    removeEmployee
-} = require("../controllers/employeeController");
+    addSupplier,
+    listSuppliers,
+    getSupplier,
+    updateSupplierById,
+    deleteSupplierById
+} = require("../controllers/supplierController");
 
+
+// Create Supplier
 router.post(
     "/",
     authMiddleware,
     authorizeRoles("COMPANY_ADMIN"),
-    addEmployee
+    addSupplier
 );
 
+
+// Supplier List
 router.get(
     "/",
     authMiddleware,
-    authorizeRoles("COMPANY_ADMIN"),
-    listEmployees
+    listSuppliers
 );
 
+
+// Single Supplier
 router.get(
     "/:id",
     authMiddleware,
-    authorizeRoles("COMPANY_ADMIN"),
-    getEmployee
+    getSupplier
 );
 
+
+// Update Supplier
 router.put(
     "/:id",
     authMiddleware,
     authorizeRoles("COMPANY_ADMIN"),
-    updateEmployeeDetails
+    updateSupplierById
 );
 
+
+// Soft Delete Supplier
 router.delete(
     "/:id",
     authMiddleware,
     authorizeRoles("COMPANY_ADMIN"),
-    removeEmployee
+    deleteSupplierById
 );
+
 module.exports = router;

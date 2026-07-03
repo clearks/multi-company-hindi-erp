@@ -38,8 +38,36 @@ const findCompanyByCode = async (company_code) => {
     return result.rows[0];
 };
 
+// Company ID से Company निकालना
+const getCompanyById = async (companyId) => {
+
+    const result = await db.query(
+
+        `
+        SELECT *
+
+        FROM companies
+
+        WHERE id = $1
+        `,
+
+        [
+
+            companyId
+
+        ]
+
+    );
+
+    return result.rows[0];
+
+};
+
+
+
 module.exports = {
     getAllCompanies,
     createCompany,
     findCompanyByCode,
+    getCompanyById
 };
